@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fas fa-brain logo-icon"></i>
+                <h1>Brain Tumor Detection System</h1>
+            </div>
+            <p class="tagline">AI-powered detection and segmentation of brain tumors from medical images</p>
+        </header>
+
+        <main>
+            <div class="app-description">
+                <p>Upload a brain MRI scan to detect and segment potential tumors using advanced deep learning models.</p>
+            </div>
+
+            <div class="content-wrapper">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Upload Brain MRI Image</h3>
+                        <p>Supported formats: PNG, JPG, JPEG, BMP, TIFF</p>
+                        <input type="file" id="imageInput" accept=".png,.jpg,.jpeg,.bmp,.tiff">
+                        <label for="imageInput" class="btn btn-primary">
+                            <i class="fas fa-folder-open"></i> Choose Image
+                        </label>
+                        <div class="selected-file" id="selectedFile">No file selected</div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="predictVggBtn" class="btn btn-predict">
+                            <i class="fas fa-search"></i> Predict VGG
+                        </button>
+                        <button id="detectYoloBtn" class="btn btn-detect">
+                            <i class="fas fa-crosshairs"></i> Detect YOLO
+                        </button>
+                        <button id="segmentSamBtn" class="btn btn-segment">
+                            <i class="fas fa-draw-polygon"></i> Segment SAM
+                        </button>
+                        <button id="resetBtn" class="btn btn-reset">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div class="api-status">
+                        <h3>API Status</h3>
+                        <div class="status-indicator">
+                            <span id="apiStatus" class="status-dot"></span>
+                            <span id="apiStatusText">Checking API connection...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-section">
+                    <div class="result-container">
+                        <h2>Results</h2>
+                        <div class="result-content">
+                            <div class="image-display">
+                                <div class="image-placeholder" id="imagePlaceholder">
+                                    <i class="fas fa-image"></i>
+                                    <p>Uploaded image will appear here</p>
+                                </div>
+                                <img id="uploadedImage" alt="Uploaded brain MRI" class="hidden">
+                                <canvas id="segmentationCanvas" class="hidden"></canvas>
+                            </div>
+
+                            <div class="prediction-results">
+                                <div class="result-card" id="predictionResult">
+                                    <h3><i class="fas fa-diagnoses"></i> VGG Prediction</h3>
+                                    <div class="result-placeholder">
+                                        <p>Click "Predict VGG" to classify the image</p>
+                                    </div>
+                                    <div class="result-details hidden">
+                                        <div class="result-row">
+                                            <span class="result-label">Prediction:</span>
+                                            <span id="predictionLabel" class="result-value"></span>
+                                        </div>
+                                        <div class="result-row">
+                                            <span class="result-label">Confidence:</span>
+                                            <span id="predictionConfidence" class="result-value"></span>
+                                        </div>
+                                        <div class="confidence-bar-container">
+                                            <div class="confidence-bar">
+                                                <div id="confidenceFill" class="confidence-fill"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card" id="detectionResult">
+                                    <h3><i class="fas fa-crosshairs"></i> YOLO Detection</h3>
+                                    <div class="result-placeholder">
+                                        <p>Click "Detect YOLO" to identify tumor regions</p>
+                                    </div>
+                                    <div class="result-details hidden">
+                                        <div id="detectionImageContainer">
+                                            <!-- Annotated image will be displayed here -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="result-card" id="segmentationResult">
+                                    <h3><i class="fas fa-shapes"></i> SAM Segmentation</h3>
+                                    <div class="result-placeholder">
+                                        <p>Click "Segment SAM" to create precise tumor masks</p>
+                                    </div>
+                                    <div class="result-details hidden">
+                                        <div id="segmentationImageContainer">
+                                            <!-- Annotated image will be displayed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> About This Tool</h3>
+                <p>This system uses a combination of deep learning models to analyze brain MRI scans:</p>
+                <ul>
+                    <li><strong>VGG16 Model:</strong> Classifies images as tumor or non-tumor</li>
+                    <li><strong>YOLO Model:</strong> Detects tumor regions with bounding boxes</li>
+                    <li><strong>SAM (Segment Anything Model):</strong> Creates precise segmentation masks</li>
+                </ul>
+                <p class="note"><strong>Note:</strong> This tool is for research and educational purposes. Always consult medical professionals for clinical diagnoses.</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Brain Tumor Detection System &copy; 2025 | Powered by FastAPI,Tensorflow & Ultralytics</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Brain Tumor Detection & Segmentation</h1>
+        <form id="uploadForm">
+            <input type="file" id="imageInput" accept="image/*" required>
+            <button type="submit">Detect & Segment</button>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html> -->

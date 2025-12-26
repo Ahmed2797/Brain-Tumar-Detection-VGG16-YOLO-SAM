@@ -1,0 +1,41 @@
+# Core
+numpy==2.2.6
+pandas==2.3.3
+tqdm>=4.66
+scipy>=1.12
+
+# Video / Image
+opencv-python>=4.8
+scikit-image>=0.21
+
+# TensorFlow / Keras
+tensorflow==2.20.0
+tensorflow-datasets==4.9.8
+
+# Plotting / Visualization
+matplotlib==3.10.8
+seaborn
+
+# Utilities
+h5py
+joblib
+
+# Optional (if using PyTorch instead of TF)
+torch==2.9.1
+torchvision==0.24.1
+torchaudio==2.9.1
+
+# Computer Vision
+ultralytics==8.3.227
+opencv-python==4.12.0.88
+opencv-python-headless==4.10.0.84
+easyocr==1.7.2
+supervision==0.27.0
+ipython==9.8.0
+numpy==2.2.6
+
+# FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+-e .
