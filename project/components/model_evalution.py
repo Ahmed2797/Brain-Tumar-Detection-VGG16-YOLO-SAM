@@ -12,7 +12,7 @@ from project.entity.config import ModelEvaluationConfig
 from project.utils import save_json
 
 import dagshub
-#dagshub.init(repo_owner='Ahmed2797', repo_name='Brain-Tumor-Detection', mlflow=True)
+dagshub.init(repo_owner='Ahmed2797', repo_name='Brain-Tumar-Detection-VGG16-YOLO-SAM', mlflow=True)
 
 
 

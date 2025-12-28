@@ -1,0 +1,174 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python project/components/data_ingestion.py
+    deps:
+    - path: project/components/data_ingestion.py
+      hash: md5
+      md5: 981293b560d8255448651a589957c058
+      size: 3060
+    - path: project/pipeline/1_data_ingestion_pipeline.py
+      hash: md5
+      md5: 6626baec19bd3873521cca96cc69c13f
+      size: 980
+    - path: yamlfile/config.yaml
+      hash: md5
+      md5: 13935727ee485cbb81c2e14a89f5ea8d
+      size: 1208
+    outs:
+    - path: artifacts/data_ingestion/archive/brain_tumor_dataset
+      hash: md5
+      md5: 8d77130541d5cd05acd22e04939d2ae2.dir
+      size: 8672762
+      nfiles: 253
+  prepare_base_model:
+    cmd: python project/pipeline/2_prepare_basemodel.py
+    deps:
+    - path: project/components/prepare_basemodel.py
+      hash: md5
+      md5: bc87dbc058a7acc1e5ab602076105b01
+      size: 2683
+    - path: project/pipeline/2_prepare_basemodel.py
+      hash: md5
+      md5: 791f5db80ece3ba5c5076e46be0a4c73
+      size: 1021
+    - path: yamlfile/config.yaml
+      hash: md5
+      md5: 13935727ee485cbb81c2e14a89f5ea8d
+      size: 1208
+    params:
+      yamlfile/param.yaml:
+        CLASSICS: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDETOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model/update_base_mode.h5
+      hash: md5
+      md5: 5210102ada775800e8064d4da8708f40
+      size: 59147448
+    - path: artifacts/prepare_base_model/vgg16.h5
+      hash: md5
+      md5: 740334d5c862dda304ee554d411627ab
+      size: 58926064
+  prepare_callbacks:
+    cmd: python project/pipeline/3_callbacks.py
+    deps:
+    - path: project/components/callbacks.py
+      hash: md5
+      md5: 9c932fe474116ce1b460c0b725cfd504
+      size: 2660
+    - path: project/entity/config.py
+      hash: md5
+      md5: 32c08c7530088ba6dba958c4fc19ed33
+      size: 4275
+    - path: project/pipeline/3_callbacks.py
+      hash: md5
+      md5: 9e14c618455cceb4bcb8bddef1d22fab
+      size: 924
+    - path: yamlfile/config.yaml
+      hash: md5
+      md5: 13935727ee485cbb81c2e14a89f5ea8d
+      size: 1208
+    outs:
+    - path: artifacts/prepare_callbacks/checkpoint_
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+    - path: artifacts/prepare_callbacks/tensorboard_log_dir
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+  model_training:
+    cmd: python project/pipeline/4_model_training.py
+    deps:
+    - path: artifacts/data_ingestion/archive/brain_tumor_dataset
+      hash: md5
+      md5: 8d77130541d5cd05acd22e04939d2ae2.dir
+      size: 8672762
+      nfiles: 253
+    - path: artifacts/prepare_base_model/update_base_mode.h5
+      hash: md5
+      md5: 5210102ada775800e8064d4da8708f40
+      size: 59147448
+    - path: project/components/callbacks.py
+      hash: md5
+      md5: 9c932fe474116ce1b460c0b725cfd504
+      size: 2660
+    - path: project/components/model_training.py
+      hash: md5
+      md5: 66ebef5ff5c94690783c5df47015463e
+      size: 4766
+    - path: project/pipeline/4_model_training.py
+      hash: md5
+      md5: 2e196e4d70b27ebee9800ce13bc9b6b8
+      size: 1487
+    - path: yamlfile/config.yaml
+      hash: md5
+      md5: 13935727ee485cbb81c2e14a89f5ea8d
+      size: 1208
+    params:
+      yamlfile/param.yaml:
+        AUGMENTATION: false
+        BATCH_SIZE: 16
+        EPOCHS: 2
+        LEARNING_RATE: 0.01
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 01c797ae0a7b6f4cb04d56f303e252e8
+      size: 59551240
+  model_evaluation:
+    cmd: python project/pipeline/5_model_evaluation.py
+    deps:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 01c797ae0a7b6f4cb04d56f303e252e8
+      size: 59551240
+    - path: project/components/model_evalution.py
+      hash: md5
+      md5: 7e38e7576a88d21be10ced8c215b50e6
+      size: 4182
+    - path: project/components/model_training.py
+      hash: md5
+      md5: 66ebef5ff5c94690783c5df47015463e
+      size: 4766
+    - path: project/pipeline/5_model_evaluation.py
+      hash: md5
+      md5: 16e0475cf2fd4072d1ec960e3dfd7701
+      size: 923
+    - path: yamlfile/config.yaml
+      hash: md5
+      md5: 13935727ee485cbb81c2e14a89f5ea8d
+      size: 1208
+    - path: yamlfile/param.yaml
+      hash: md5
+      md5: 936bb54b47ee03961dfa591171ac60a2
+      size: 142
+    params:
+      yamlfile/param.yaml:
+        BATCH_SIZE: 16
+        CLASSICS: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: artifacts/model_evaluation/report.yaml
+      hash: md5
+      md5: 6794bf7cb62301d0fcbbabe39eec8ddd
+      size: 54
+    - path: artifacts/model_evaluation/report/report.json
+      hash: md5
+      md5: 6060f5d7d5995d1acdedf11ea4e62855
+      size: 70
+    - path: artifacts/model_evaluation/scores/scores.json
+      hash: md5
+      md5: 6060f5d7d5995d1acdedf11ea4e62855
+      size: 70

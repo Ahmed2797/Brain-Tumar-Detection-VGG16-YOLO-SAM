@@ -137,7 +137,7 @@ class TrainingPipeline:
             logging.info(">>>>>>> Model Evaluation started <<<<<<<<<")
             model_evaluation_config = self.config.get_model_evaluation_config()
             model_evaluation = Evaluation(model_evaluation_config)
-            model_evaluation.evaluate_model()
+            model_evaluation.evalution()
             logging.info(">>>>>>> Model Evaluation completed <<<<<<<<<")
         except Exception as e:
             raise CustomException(e, sys)
@@ -158,7 +158,7 @@ class TrainingPipeline:
             self.run_data_ingestion()
             self.run_prepare_base_model()
             self.run_model_training()
-            #self.run_model_evaluation()
+            self.run_model_evaluation()
             logging.info(">>>>>>> Training Pipeline completed <<<<<<<<<")
         except Exception as e:
             raise CustomException(e, sys)

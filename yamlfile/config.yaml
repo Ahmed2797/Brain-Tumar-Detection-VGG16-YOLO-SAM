@@ -32,7 +32,7 @@ model_evaluation:
   scores_file: scores.json
   report_file_dir: artifacts/model_evaluation/report
   report_file: report.json
-  # mlflow_tracking_uri: "https://dagshub.com/Ahmed2797/{================}.mlflow"
-  # mlflow_experiment_name: "Brain_Mri"
+  mlflow_tracking_uri: "https://dagshub.com/Ahmed2797/Brain-Tumar-Detection-VGG16-YOLO-SAM.mlflow"
+  mlflow_experiment_name: "Brain_Mri"
 
 

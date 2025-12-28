@@ -5,6 +5,7 @@ import gdown
 from project.logger import logging
 from project.exception import CustomException
 from project.entity.config import DataIngestionConfig
+from project.configeration import ConfigerationManager
 
 
 class DataIngestion:
@@ -82,3 +83,12 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e, sys)
 
+if __name__=="__main__":
+    try:
+        config = ConfigerationManager()
+        data_ingestion_config = config.get_data_ingestion_config()
+        data_ingestion = DataIngestion(data_ingestion_config)
+        data_ingestion.download_data()
+        data_ingestion.extract_zip_file()
+    except Exception as e:
+        raise CustomException(e, sys)
