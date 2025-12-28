@@ -77,14 +77,14 @@ stages:
     outs:
     - path: artifacts/prepare_callbacks/checkpoint_
       hash: md5
-      md5: d751713988987e9331980363e24189ce.dir
-      size: 0
-      nfiles: 0
+      md5: ff5a41069dd6d7dd3151fba0b7b33d47.dir
+      size: 59551240
+      nfiles: 1
     - path: artifacts/prepare_callbacks/tensorboard_log_dir
       hash: md5
-      md5: d751713988987e9331980363e24189ce.dir
-      size: 0
-      nfiles: 0
+      md5: f50688a2ac48d95707b12bf3f4528e63.dir
+      size: 20544
+      nfiles: 2
   model_training:
     cmd: python project/pipeline/4_model_training.py
     deps:
