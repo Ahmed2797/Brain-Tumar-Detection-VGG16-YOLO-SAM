@@ -4,3 +4,5 @@ brain20.pt
 sam_b.pt
 artifacts
 chatapp
+.env
+Brain_MRI.egg-info
