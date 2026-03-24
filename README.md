@@ -16,6 +16,12 @@ conda activate brain
 
 # Install pip packages from requirements.txt
 pip install -r requirements.txt
+
+## full pipeline
+python main.py
+
+## run web app
+python app.py
 ```
 
 ---
