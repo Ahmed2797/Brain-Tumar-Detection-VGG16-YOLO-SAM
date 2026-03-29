@@ -33,9 +33,7 @@ class TraningPipeline:
             # Prepare model and data
             trainer.get_base_model()
             trainer.train_valid_generator()
-            trainer.train()
 
-            # Train the model (uncomment when callbacks are ready)
             trainer.train(callbacks=callback_list)
 
         except Exception as e:
